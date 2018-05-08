@@ -1,9 +1,9 @@
 ﻿//////////////////////////////////////////////////////////////////////
-// Algorithmia is (c) 2014 Solutions Design. All rights reserved.
+// Algorithmia is (c) 2018 Solutions Design. All rights reserved.
 // https://github.com/SolutionsDesign/Algorithmia
 //////////////////////////////////////////////////////////////////////
 // COPYRIGHTS:
-// Copyright (c) 2014 Solutions Design. All rights reserved.
+// Copyright (c) 2018 Solutions Design. All rights reserved.
 // 
 // The Algorithmia library sourcecode and its accompanying tools, tests and support code
 // are released under the following license: (BSD2)
@@ -212,6 +212,26 @@ namespace SD.Tools.Algorithmia.Graphs
 		public override string ToString()
 		{
 			return string.Format("{0}. Vertex count: {0}. Edge count: {1}.", _graphDescription, this.VertexCount);
+		}
+
+
+		/// <summary>
+		/// Gets the vertices as list, and perform this operation synced with the SyncRoot, to avoid threading issues.
+		/// </summary>
+		/// <returns></returns>
+		public List<TVertex> GetVerticesSyncedAsList()
+		{
+			return PerformSyncedAction(()=>this.Vertices.ToList());
+		}
+
+
+		/// <summary>
+		/// Gets the edges as list, and perform this operation synced with the SyncRoot, to avoid threading issues.
+		/// </summary>
+		/// <returns></returns>
+		public List<TEdge> GetEdgesSyncedAsList()
+		{
+			return PerformSyncedAction(() => this.Edges.ToList());
 		}
 
 
